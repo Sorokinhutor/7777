@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5A4CAF50"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/user"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_alignParentTop="true"
+        android:text="@string/user" />
+
+    <TextView
+        android:id="@+id/user2"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/user"
+        android:hint="Username"
+        android:textSize="20sp"
+
+        />
+
+    <TextView
+        android:id="@+id/urlPath"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/user2"
+        android:hint="@string/path"
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/urlPath1"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/urlPath"
+
+        android:textColorHint="#546E7A" />
+
+
+    <TextView
+        android:id="@+id/karma"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/urlPath1"
+        android:hint="@string/karma"
+
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/karma1"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/karma"
+
+
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/pageCount"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/karma1"
+        android:text="@string/pageCount"
+
+        />
+    <TextView
+        android:id="@+id/pageCount1"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/pageCount"
+
+
+        />
+
+
+    <TextView
+        android:id="@+id/commentsCount"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/pageCount1"
+
+        android:text="@string/commentsCount" />
+
+    <TextView
+        android:id="@+id/commentsCount1"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/commentsCount"
+
+        />
+
+    <TextView
+        android:id="@+id/commentsVolume"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/commentsCount1"
+        android:text="@string/commentsVolume"/>
+
+    <TextView
+        android:id="@+id/commentsVolume1"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_below="@+id/commentsVolume"
+
+
+        />
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/commentsVolume1"
+        android:text="Тестовый комментарий:"
+        android:textSize="20sp"
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/work"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/test"
+        android:hint="@string/work"
+
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/work1"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/work"
+        android:hint="@string/work"
+
+        android:textColorHint="#546E7A" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="300sp"
+
+        android:layout_height="50sp"
+        android:layout_below="@+id/work1"
+
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:textColorHint="#546E7A" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_below="@+id/work1"
+
+        android:layout_alignParentEnd="true"
+
+        android:layout_toEndOf="@+id/userName"
+        android:backgroundTint="#00BCD4"
+        android:text="@string/button" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button" />
+
+    <Button
+        android:id="@+id/buttonMain"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/progressBar"
+        android:backgroundTint="#8BC34A"
+        android:text="@string/buttonMain" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonMain"
+        android:minHeight="48dp"
+        android:text="@string/checkbox" />
+
+    <TextView
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/checkBox"
+        android:hint="@string/work"
+
+        android:textColorHint="#546E7A" />
+
+</RelativeLayout>

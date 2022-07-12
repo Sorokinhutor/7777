@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">777</string>
+    <string no_user_input="no_input" name="input" />
+    <string no_user_input1="no_connect" name="input1" />
+    <string name="no_user_input">Введите имя</string>
+    <string name="no_user_input1">Сначала нажмите тест!</string>
+    <string name="no_user_input2">Нажмите флажок!!!</string>
+    <string name="user">Привет,</string>
+    <string name="commentsVolume">Придется примерно скачать, Мб</string>
+    <string name="karma">Karma</string>
+    <string name="commentsCount">Количество комментариев</string>
+    <string name="work">Работаем</string>
+    <string name="name">INPUT UserName</string>
+    <string name="button">Тест</string>
+    <string name="path">Путь</string>
+    <string name="pageCount">Количество страниц</string>
+    <string name="buttonMain">Поехали!</string>
+    <string name="checkbox">Я понимаю и хочу скачать комментарии как текст</string>
+
+</resources>
