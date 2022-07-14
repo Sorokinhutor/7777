@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import okhttp3.Call;
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity  {
     @SuppressLint("SetTextI18n")
     public void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
             setContentView(R.layout.activity_main);
             Button button = findViewById(R.id.button);
@@ -269,9 +274,16 @@ public class MainActivity extends AppCompatActivity  {
 
                             for (int i = 0; i <= 100; i++) {
 
-                                progressBar.incrementProgressBy(1);
+                                //progressBar.incrementProgressBy(1);
 
                                 int cycle = j*100 + i;
+
+
+
+                                    progressBar.setProgress(cycle);
+                                    control.setText("Пасим страница№" + cycle);
+
+
 
 
 
@@ -286,69 +298,66 @@ public class MainActivity extends AppCompatActivity  {
                                 Call call1 = client1.newCall(request1);
 
 
-
-
-                                int finalJ = j;
-                                call1.enqueue(new Callback() {
-
-                                    @SuppressWarnings("NullableProblems")
-                                    @Override
-                                    public void onFailure(Call call1, IOException e) {
-                                        Toast.makeText(MainActivity.this, R.string.no_user_input1, Toast.LENGTH_LONG).show();
-                                    }
-
-
-                                    @SuppressLint("SetTextI18n")
-                                    @SuppressWarnings("NullableProblems")
-
-                                    @Override
-                                    public void onResponse(Call call1, Response response1) throws IOException {
-
-                                        assert response1.body() != null;
-                                       final String responseStr1 = response1.body().string();
+                                try {
+                                    call1.clone().execute();
+                                    String responseStr1 = Objects.requireNonNull(call1.execute().body()).string();
+                                    arrayList2.get(j).add(responseStr1);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
 
 
-                                        runOnUiThread(() -> {
-
-                                            progressBar.setProgress(cycle);
-                                            control.setText("Пасим страница№" + cycle);
 
 
 
-                                            arrayList2.get(finalJ).add(responseStr1);
-
-
-                                            String ee = arrayList2.get(finalJ).toString();
-
-                                            FileOutputStream fos2 = null;
-                                            try {
-                                                fos2 = openFileOutput(finalFileName1, Context.MODE_PRIVATE);
-                                            } catch (FileNotFoundException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                assert fos2 != null;
-                                                fos2.write(ee.getBytes());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                fos2.close();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
 
 
 
-                                        });
+
+
+
+
+
+
+
+
 
 
 
                                     }
-                                });
 
+                            String ee = arrayList2.get(j).toString();
+
+                            FileOutputStream fos2 = null;
+                            try {
+                                fos2 = openFileOutput(finalFileName1, Context.MODE_PRIVATE);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
                             }
+                            try {
+                                assert fos2 != null;
+                                fos2.write(ee.getBytes());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                fos2.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
+
+
+
+
+
+                        }
+
+
 
                         }
 
@@ -360,7 +369,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-                            }
+
 
             });
 
