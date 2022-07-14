@@ -16,5 +16,7 @@
     <string name="pageCount">Количество страниц</string>
     <string name="buttonMain">Поехали!</string>
     <string name="checkbox">Я понимаю и хочу скачать комментарии как текст</string>
+    <string name="username">Username</string>
+    <string name="test">Тестовый комментарий:</string>
 
 </resources>

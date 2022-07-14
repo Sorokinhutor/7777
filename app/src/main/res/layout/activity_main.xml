@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,21 +9,22 @@
 
     <TextView
         android:id="@+id/user"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_alignParentTop="true"
-        android:text="@string/user" />
+
+        android:text="@string/user"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/user2"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/user"
-        android:hint="Username"
-        android:textSize="20sp"
-
-        />
+        android:hint="@string/username"
+        android:background="@drawable/textlines"
+        android:textColorHint="#2E7D32"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/urlPath"
@@ -37,49 +37,35 @@
 
     <TextView
         android:id="@+id/urlPath1"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/urlPath"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:background="@drawable/textlines"
 
-        android:textColorHint="#546E7A" />
-
-
-    <TextView
-        android:id="@+id/karma"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="30sp"
-        android:layout_below="@+id/urlPath1"
-        android:hint="@string/karma"
-
-        android:textColorHint="#546E7A" />
-
-    <TextView
-        android:id="@+id/karma1"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="30sp"
-        android:layout_below="@+id/karma"
+        android:textSize="20sp" />
 
 
-        android:textColorHint="#546E7A" />
+
 
     <TextView
         android:id="@+id/pageCount"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
-        android:layout_below="@+id/karma1"
+        android:layout_below="@+id/urlPath1"
         android:text="@string/pageCount"
 
         />
+
     <TextView
         android:id="@+id/pageCount1"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/pageCount"
+        android:textSize="20sp"
+        android:background="@drawable/textlines"
 
 
         />
@@ -96,27 +82,29 @@
 
     <TextView
         android:id="@+id/commentsCount1"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/commentsCount"
+        android:textSize="20sp"
+        android:background="@drawable/textlines"
 
         />
 
     <TextView
         android:id="@+id/commentsVolume"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/commentsCount1"
-        android:text="@string/commentsVolume"/>
+        android:text="@string/commentsVolume"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/commentsVolume1"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="30sp"
         android:layout_below="@+id/commentsVolume"
+        android:textSize="20sp"
+        android:background="@drawable/textlines"
 
 
         />
@@ -124,29 +112,31 @@
     <TextView
         android:id="@+id/test"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="30sp"
         android:layout_below="@+id/commentsVolume1"
-        android:text="Тестовый комментарий:"
-        android:textSize="20sp"
-        android:textColorHint="#546E7A" />
+        android:text="@string/test"
+        android:textColorHint="#546E7A"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/work"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="200sp"
         android:layout_below="@+id/test"
+        android:background="@drawable/textlines"
         android:hint="@string/work"
 
-        android:textColorHint="#546E7A" />
+        android:textColorHint="#455A64" />
 
     <TextView
         android:id="@+id/work1"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="30sp"
         android:layout_below="@+id/work"
         android:hint="@string/work"
+        android:background="@drawable/textlines"
 
-        android:textColorHint="#546E7A" />
+        android:textColorHint="#455A64" />
 
     <EditText
         android:id="@+id/userName"
@@ -159,7 +149,7 @@
         android:ems="10"
         android:hint="@string/name"
         android:inputType="text"
-        android:textColorHint="#546E7A" />
+        android:textColorHint="#455A64" />
 
     <Button
         android:id="@+id/button"
@@ -194,8 +184,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonMain"
-        android:minHeight="48dp"
-        android:text="@string/checkbox" />
+        android:minHeight="32dp"
+        android:text="@string/checkbox"
+        android:textColor="#00695C"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/control"
@@ -203,7 +195,7 @@
         android:layout_height="50sp"
         android:layout_below="@+id/checkBox"
         android:hint="@string/work"
-
+        android:background="@drawable/textlines"
         android:textColorHint="#546E7A" />
 
 </RelativeLayout>

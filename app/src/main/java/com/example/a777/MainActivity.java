@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity  {
         return url1;
     }
 
+    @SuppressLint("SetTextI18n")
     public void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
 
@@ -114,10 +115,10 @@ public class MainActivity extends AppCompatActivity  {
                                 // work.setText(responseStr);
                             });
                             //делаем общий массив
-                            JSONTokener tokener1 = new JSONTokener(responseStr);
+                            JSONTokener tokOne = new JSONTokener(responseStr);
                             JSONObject json1 = null;
                             try {
-                                json1 = new JSONObject(tokener1);
+                                json1 = new JSONObject(tokOne);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -143,17 +144,17 @@ public class MainActivity extends AppCompatActivity  {
                             editor.putInt("your_int_key", commentsPages);
                             editor.apply();
 
-                            int commentsnumber = commentsPages * 42;
+                            int commentsNumber = commentsPages * 42;
 
                             //печать количества комментариев
-                            commentsCount1.setText(String.valueOf(commentsnumber));
+                            commentsCount1.setText(String.valueOf(commentsNumber));
 
-                            Double commentsvolume = commentsPages * 0.045;
+                            Double commentsVolume = commentsPages * 0.045;
 
-                            @SuppressLint("DefaultLocale") String commentsvolumeToString = String.format("%.3f", commentsvolume);
+                            @SuppressLint("DefaultLocale") String commentsVolumeToString = String.format("%.3f", commentsVolume);
 
                             //печать объема для скачивания
-                            commentsValue1.setText(commentsvolumeToString);
+                            commentsValue1.setText(commentsVolumeToString);
 
                             JSONArray data1 = null;
                             try {
@@ -243,15 +244,15 @@ public class MainActivity extends AppCompatActivity  {
                     SharedPreferences sp1 = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
                     String myUserName = sp1.getString("your_Username", String.valueOf(-1));
 
-                    String finalFileName = "jsonComments_" + myUserName + ".json";
+                    //String finalFileName = "jsonComments_" + myUserName + ".json";
 
                     progressBar.setMax(myIntValue-2);
 
-                    if (myIntValue>100) {
+
 
                         int part = myIntValue/100;
 
-                        int finalpart = myIntValue%100;
+                       // int finalPart = myIntValue%100;
 
 
 
@@ -259,6 +260,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
                             arrayList2.add(new ArrayList<>());
+
                             //noinspection ResultOfMethodCallIgnored
                             arrayList2.get(j);
 
@@ -273,11 +275,9 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
                                 Request request1 = new Request
                                         .Builder()
                                         .get()
-                                        //.addHeader("Accept-Encoding", "gzip,deflate, br")
                                         .url(getUrl1() + "?page=" + cycle)
                                         .build();
 
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-                                //int finalI = i;
+
                                 int finalJ = j;
                                 call1.enqueue(new Callback() {
 
@@ -309,8 +309,12 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
                                         runOnUiThread(() -> {
+
+                                            progressBar.setProgress(cycle);
+                                            control.setText("Пасим страница№" + cycle);
+
+
 
                                             arrayList2.get(finalJ).add(responseStr1);
 
@@ -336,11 +340,10 @@ public class MainActivity extends AppCompatActivity  {
                                             }
 
 
-                                            progressBar.setProgress(cycle);
-                                            control.setText("Пасим страница№" + cycle);
-
 
                                         });
+
+
 
                                     }
                                 });
@@ -350,175 +353,14 @@ public class MainActivity extends AppCompatActivity  {
                         }
 
 
-                                int end = part + 1;
-
-                        ArrayList<String>arrayList3;
-                        arrayList3 = new ArrayList<>();
-
-                        String finalFileName2 = "jsonComments_" + myUserName + end + ".json";
-
-                                for (int i = 0; i <= finalpart; i++) {
-
-                                    progressBar.incrementProgressBy(1);
-
-                                    Request request1 = new Request
-                                            .Builder()
-                                            .get()
-                                            //.addHeader("Accept-Encoding", "gzip,deflate, br")
-                                            .url(getUrl1() + "?page=" + (end*100 +i + 1))
-                                            .build();
-                                    Call call1 = client1.newCall(request1);
-
-                                    int finalI = i;
-
-                                    call1.enqueue(new Callback() {
-
-                                        @SuppressWarnings("NullableProblems")
-                                        @Override
-                                        public void onFailure(Call call1, IOException e) {
-                                            Toast.makeText(MainActivity.this, R.string.no_user_input1, Toast.LENGTH_LONG).show();
-                                        }
 
 
-                                        @SuppressWarnings("NullableProblems")
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void onResponse(Call call1, Response response1) throws IOException {
-
-                                            assert response1.body() != null;
-                                            String responseStr1 = response1.body().string();
 
 
-                                            runOnUiThread(() -> {
 
-                                                arrayList3.add(responseStr1);
-
-                                                String ee;
-                                                ee = arrayList3.toString();
-
-                                                FileOutputStream fos2 = null;
-                                                try {
-                                                    fos2 = openFileOutput(finalFileName2, Context.MODE_PRIVATE);
-                                                } catch (FileNotFoundException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                try {
-                                                    assert fos2 != null;
-                                                    fos2.write(ee.getBytes());
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                try {
-                                                    fos2.close();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-
-
-                                                progressBar.setProgress(end*100 + finalI);
-                                                control.setText("Пасим страница№" + (end*100 + finalI));
-
-
-                                            });
-
-                                        }
-                                    });
-
-                                }
 
 
                             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    else {
-
-                         ArrayList<String>arrayList;
-                        arrayList = new ArrayList<>();
-
-                        for (int i = 0; i <= myIntValue; i++) {
-
-                            progressBar.incrementProgressBy(1);
-
-                            Request request1 = new Request
-                                    .Builder()
-                                    .get()
-                                    //.addHeader("Accept-Encoding", "gzip,deflate, br")
-                                    .url(getUrl1() + "?page=" + (i + 1))
-                                    .build();
-                            Call call1 = client1.newCall(request1);
-
-                            int finalI = i;
-                            call1.enqueue(new Callback() {
-
-                                @SuppressWarnings("NullableProblems")
-                                @Override
-                                public void onFailure(Call call1, IOException e) {
-                                    Toast.makeText(MainActivity.this, R.string.no_user_input1, Toast.LENGTH_LONG).show();
-                                }
-
-
-                                @SuppressWarnings("NullableProblems")
-                                @SuppressLint("SetTextI18n")
-                                @Override
-                                public void onResponse(Call call1, Response response1) throws IOException {
-
-                                    assert response1.body() != null;
-                                    String responseStr1 = response1.body().string();
-
-
-                                    runOnUiThread(() -> {
-
-                                        arrayList.add(responseStr1);
-
-                                        String ee;
-                                        ee = arrayList.toString();
-
-                                        FileOutputStream fos2 = null;
-                                        try {
-                                            fos2 = openFileOutput(finalFileName, Context.MODE_PRIVATE);
-                                        } catch (FileNotFoundException e) {
-                                            e.printStackTrace();
-                                        }
-                                        try {
-                                            assert fos2 != null;
-                                            fos2.write(ee.getBytes());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        try {
-                                            fos2.close();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-
-
-                                        progressBar.setProgress(finalI);
-                                        control.setText("Пасим страница№" + finalI);
-
-
-                                    });
-
-                                }
-                            });
-
-                        }
-
-
-                    }
-
-
-                }
 
             });
 
