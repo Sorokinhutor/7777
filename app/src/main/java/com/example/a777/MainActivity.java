@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private String url1;
 
+
+
     public void setUrl1(String url1) {
         this.url1 = url1;
     }
@@ -199,7 +201,7 @@ public class MainActivity extends AppCompatActivity  {
                             }
 
                             assert rating != null;
-                            String end = "Написал " + user1 + formattedDate + " ,Рейтинг " + rating;
+                            String end = "Написал " + user1 +" "+ formattedDate + ", Рейтинг " + rating;
 
                             work.setText(body);
                             work1.setText(end);
@@ -257,24 +259,35 @@ public class MainActivity extends AppCompatActivity  {
 
 
                             arrayList2.add(new ArrayList<>());
-                            arrayList2.get(j).add(null);
+                            //noinspection ResultOfMethodCallIgnored
+                            arrayList2.get(j);
 
 
-
+                            String finalFileName1 = "jsonComments_" + myUserName + j + ".json";
 
                             for (int i = 0; i <= 100; i++) {
 
                                 progressBar.incrementProgressBy(1);
 
+                                int cycle = j*100 + i;
+
+
+
+
                                 Request request1 = new Request
                                         .Builder()
                                         .get()
                                         //.addHeader("Accept-Encoding", "gzip,deflate, br")
-                                        .url(getUrl1() + "?page=" + (j + i + 1))
+                                        .url(getUrl1() + "?page=" + cycle)
                                         .build();
+
+
+
                                 Call call1 = client1.newCall(request1);
 
-                                int finalI = i;
+
+
+                                //int finalI = i;
                                 int finalJ = j;
                                 call1.enqueue(new Callback() {
 
@@ -285,13 +298,16 @@ public class MainActivity extends AppCompatActivity  {
                                     }
 
 
-                                    @SuppressWarnings("NullableProblems")
                                     @SuppressLint("SetTextI18n")
+                                    @SuppressWarnings("NullableProblems")
+
                                     @Override
                                     public void onResponse(Call call1, Response response1) throws IOException {
 
                                         assert response1.body() != null;
-                                        String responseStr1 = response1.body().string();
+                                       final String responseStr1 = response1.body().string();
+
+
 
 
                                         runOnUiThread(() -> {
@@ -303,7 +319,7 @@ public class MainActivity extends AppCompatActivity  {
 
                                             FileOutputStream fos2 = null;
                                             try {
-                                                fos2 = openFileOutput(finalFileName + finalJ, Context.MODE_PRIVATE);
+                                                fos2 = openFileOutput(finalFileName1, Context.MODE_PRIVATE);
                                             } catch (FileNotFoundException e) {
                                                 e.printStackTrace();
                                             }
@@ -320,8 +336,8 @@ public class MainActivity extends AppCompatActivity  {
                                             }
 
 
-                                            progressBar.setProgress(finalJ+finalI);
-                                            control.setText("Пасим страница№" + finalJ+finalI);
+                                            progressBar.setProgress(cycle);
+                                            control.setText("Пасим страница№" + cycle);
 
 
                                         });
@@ -339,7 +355,7 @@ public class MainActivity extends AppCompatActivity  {
                         ArrayList<String>arrayList3;
                         arrayList3 = new ArrayList<>();
 
-
+                        String finalFileName2 = "jsonComments_" + myUserName + end + ".json";
 
                                 for (int i = 0; i <= finalpart; i++) {
 
@@ -349,7 +365,7 @@ public class MainActivity extends AppCompatActivity  {
                                             .Builder()
                                             .get()
                                             //.addHeader("Accept-Encoding", "gzip,deflate, br")
-                                            .url(getUrl1() + "?page=" + (i + 1))
+                                            .url(getUrl1() + "?page=" + (end*100 +i + 1))
                                             .build();
                                     Call call1 = client1.newCall(request1);
 
@@ -382,7 +398,7 @@ public class MainActivity extends AppCompatActivity  {
 
                                                 FileOutputStream fos2 = null;
                                                 try {
-                                                    fos2 = openFileOutput(finalFileName + end, Context.MODE_PRIVATE);
+                                                    fos2 = openFileOutput(finalFileName2, Context.MODE_PRIVATE);
                                                 } catch (FileNotFoundException e) {
                                                     e.printStackTrace();
                                                 }
@@ -399,8 +415,8 @@ public class MainActivity extends AppCompatActivity  {
                                                 }
 
 
-                                                progressBar.setProgress(end+finalI);
-                                                control.setText("Пасим страница№" + end+finalI);
+                                                progressBar.setProgress(end*100 + finalI);
+                                                control.setText("Пасим страница№" + (end*100 + finalI));
 
 
                                             });
