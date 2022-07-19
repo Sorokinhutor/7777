@@ -3,10 +3,11 @@ package com.example.a777;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity  {
             setContentView(R.layout.activity_main);
             Button button = findViewById(R.id.button);
             Button buttonMain = findViewById(R.id.buttonMain);
+            Button buttonNext = findViewById(R.id.buttonNext);
             EditText userName = findViewById(R.id.userName);
             TextView user2 = findViewById(R.id.user2);
             CheckBox checkBox = findViewById(R.id.checkBox);
@@ -70,6 +72,8 @@ public class MainActivity extends AppCompatActivity  {
             TextView work1 = findViewById(R.id.work1);
             TextView urlPath1 = findViewById(R.id.urlPath1);
             ProgressBar progressBar = findViewById(R.id.progressBar);
+
+
 
             button.setOnClickListener(view -> {
                 // Если ничего не ввели в поле, то выдаем всплывающую подсказку
@@ -238,30 +242,27 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-                   ArrayList< ArrayList<String>> arrayList2 = new ArrayList<>();
 
 
-                    OkHttpClient client1 = new OkHttpClient();
-
-                    SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-                    int myIntValue = sp.getInt("your_int_key", -1);
-
-                    SharedPreferences sp1 = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-                    String myUserName = sp1.getString("your_Username", String.valueOf(-1));
-
-                    //String finalFileName = "jsonComments_" + myUserName + ".json";
-
-                    progressBar.setMax(myIntValue-2);
+                        ArrayList<ArrayList<String>> arrayList2 = new ArrayList<>();
 
 
+                        OkHttpClient client1 = new OkHttpClient();
 
-                        int part = myIntValue/100;
+                        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+                        int myIntValue = sp.getInt("your_int_key", -1);
 
-                       // int finalPart = myIntValue%100;
+                        SharedPreferences sp1 = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+                        String myUserName = sp1.getString("your_Username", String.valueOf(-1));
+
+                        //String finalFileName = "jsonComments_" + myUserName + ".json";
+
+                        progressBar.setMax(myIntValue - 2);
 
 
+                        int part = myIntValue / 100;
 
-                        for (int j=0; j<=part; j++) {
+                        for (int j = 0; j <= part; j++) {
 
 
                             arrayList2.add(new ArrayList<>());
@@ -276,15 +277,7 @@ public class MainActivity extends AppCompatActivity  {
 
                                 //progressBar.incrementProgressBy(1);
 
-                                int cycle = j*100 + i;
-
-
-
-                                    progressBar.setProgress(cycle);
-                                    control.setText("Пасим страница№" + cycle);
-
-
-
+                                int cycle = j * 100 + i;
 
 
                                 Request request1 = new Request
@@ -292,7 +285,6 @@ public class MainActivity extends AppCompatActivity  {
                                         .get()
                                         .url(getUrl1() + "?page=" + cycle)
                                         .build();
-
 
 
                                 Call call1 = client1.newCall(request1);
@@ -307,25 +299,7 @@ public class MainActivity extends AppCompatActivity  {
                                 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
+                            }
 
                             String ee = arrayList2.get(j).toString();
 
@@ -347,33 +321,37 @@ public class MainActivity extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
 
-
-
-
-
-
-
-
-
+                            progressBar.setProgress(j * 100);
+                            control.setText("Пасим страница№" + j * 100);
+                            control.setText("готово" + j);
                         }
 
-
-
-                        }
-
-
-
-
-
-
-
+                    }
 
 
 
 
             });
 
-        }
+        
 
+        buttonNext.setOnClickListener(view -> {
+
+
+
+
+
+
+                    Intent intent = new Intent(this, ActivityTwo.class);
+                    startActivity(intent);
+
+
+            });
+        
+        
+        
+        
+        
+    }
 }
 

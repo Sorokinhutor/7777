@@ -121,7 +121,7 @@
     <TextView
         android:id="@+id/work"
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="150sp"
         android:layout_below="@+id/test"
         android:background="@drawable/textlines"
         android:hint="@string/work"
@@ -179,11 +179,19 @@
         android:backgroundTint="#8BC34A"
         android:text="@string/buttonMain" />
 
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@+id/buttonMain"
+        android:backgroundTint="#8BC34A"
+        android:text="@string/buttonNext" />
+
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonMain"
+        android:layout_below="@+id/buttonNext"
         android:minHeight="32dp"
         android:text="@string/checkbox"
         android:textColor="#00695C"
