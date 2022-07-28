@@ -84,8 +84,11 @@ public class MainActivity extends AppCompatActivity  {
 
                 } else {
                     // Если ввели, то формируем ссылку для получения погоды
+
+
+
                     String user1 = userName.getText().toString();
-                    String url1 = "https://d3.ru/api/users/" + user1 + "/comments/";
+                    String url1="https://d3.ru/api/users/" + user1 + "/comments/";
                     this.setUrl1(url1);
 
                     SharedPreferences sp1 = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
